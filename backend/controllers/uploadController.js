@@ -1,6 +1,7 @@
 const os = require('os');
 const path = require('path');
 const qr = require('../utils/qrGenerator');
+const { exec } = require('child_process');
 
 function getLocalIP() {
   const interfaces = os.networkInterfaces();
@@ -40,6 +41,18 @@ exports.handleFileUpload = (req, res) => {
     return res.status(400).send('No file uploaded.');
   }
 
-  console.log(`✅ File uploaded: ${req.file.filename}`);
+  const sessionId = req.params.sessionId;
+  const path = require('path');
+  const os = require('os');
+
+  // Determine folder path based on session ID
+  const uploadDir = path.join(os.homedir(), 'Desktop', 'QRUploads', sessionId);
+
+  console.log(`✅ File uploaded: ${req.file.originalname}`);
+
+  // Open the folder
+  exec(`start "" "${uploadDir}"`);
+
   res.send('File uploaded successfully!');
 };
+
