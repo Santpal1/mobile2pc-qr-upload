@@ -46,7 +46,7 @@ exports.handleFileUpload = (req, res) => {
   const os = require('os');
 
   // Determine folder path based on session ID
-  const uploadDir = path.join(os.homedir(), 'Desktop', 'QRUploads', sessionId);
+  const uploadDir = path.join(os.homedir(), 'OneDrive', 'Desktop', 'QRUploads', sessionId);
 
   console.log(`✅ File uploaded: ${req.file.originalname}`);
 
